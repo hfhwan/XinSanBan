@@ -6,11 +6,14 @@ import java.util.Map;
 public class Constant {
 
 	public static String redisHost = "192.168.0.107";
-
-	public static Map<String, String> ShenFengUrl = new HashMap<String, String>();
-
 	public static String keyCorps = "corps-all";
 	
+	//N-不要发 W-等待发 Y-已经发
+	public static String corpNoSend = "N";
+	public static String corpWaitSend = "W";
+	public static String corpSended = "Y";
+	
+	public static Map<String, String> ShenFengUrl = new HashMap<String, String>();
 	static {
 		ShenFengUrl.put("beijing" , "http://www.csrc.gov.cn/pub/beijing/bjfdqyxx/bjfdqyjbqk/"         );
 		ShenFengUrl.put("tianjin" , "http://www.csrc.gov.cn/pub/tianjin/tjfdqyxx/tjfdqyjbqk/"         );

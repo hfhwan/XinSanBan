@@ -34,10 +34,10 @@ public class App {
 	public static void main(String[] args) throws InvalidFormatException, IOException {
 		long day = 1000 * 60 * 60 *24;
 		Timer timer = new Timer();
-//		timer.scheduleAtFixedRate(new TaskImportCorp(), 1, day);
-//		timer.scheduleAtFixedRate(new TaskImportNewsAll(), 2000, day);
+		timer.scheduleAtFixedRate(new TaskImportCorp(), 1, day);
+		timer.scheduleAtFixedRate(new TaskImportNewsAll(), 2000, day);
 		timer.scheduleAtFixedRate(new TaskImportNews(), 2000, day);
-//		timer.scheduleAtFixedRate(new TaskFindIPOAll(), 2000, day);
+		timer.scheduleAtFixedRate(new TaskFindIPOAll(), 2000, day);
 		
 //		getFromRedis();
 		

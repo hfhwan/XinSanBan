@@ -14,45 +14,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import redis.clients.jedis.Jedis;
 
 public class TaskFindIPOAll extends TimerTask {
-	Jedis jedis = new Jedis(Constant.redisHost);
-	List<Corp> corps = new ArrayList<Corp>();
+	CorpDao corpDao = new CorpDao();
 
 	@Override
 	public void run() {
 		try {
 			System.out.println(new Date() + " TaskFindIPOAll begin");
-			loadAllCorps();
-			Set<String> keyAddrNews = jedis.keys("addr-*");
-			for (String key : keyAddrNews) {
-				Set<String> newses = jedis.zrevrange(key, 0, -1);
-				for (String news : newses) {
-					compareNewsAndCorp(key, news);
-				}
+			Set<Corp> corps = corpDao.findCorpToSend();
+			for (Corp corp : corps) {
+				System.out.println(corp);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		jedis.close();
 		System.out.println(new Date() + " TaskFindIPOAll complete");
-	}
-
-	private void loadAllCorps() throws JsonParseException, JsonMappingException, IOException {
-		Set<String> corpsStr = jedis.smembers(Constant.keyCorps);
-		ObjectMapper om = new ObjectMapper();
-		for (String corpStr : corpsStr) {
-			Corp corp = om.readValue(corpStr, Corp.class);
-			corps.add(corp);
-		}
-	}
-
-	public void compareNewsAndCorp(String shenfeng, String news) {
-		for (Corp corp : corps) {
-			if (news.indexOf(corp.name) > -1) {
-				System.out.println("find!!!!:" + shenfeng + ":" + corp.no + "(" + corp.name + ")" + news);
-				jedis.hset("find-" + corp.no, news, corp.name);
-				jedis.hset("find-" + corp.no, "send", "false");
-			}
-		}
 	}
 }

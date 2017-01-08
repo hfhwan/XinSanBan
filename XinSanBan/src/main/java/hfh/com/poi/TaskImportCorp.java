@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import redis.clients.jedis.Jedis;
 
 public class TaskImportCorp extends TimerTask{
-	Jedis jedis = new Jedis(Constant.redisHost);
+	CorpDao corpDao = new CorpDao();
 
 	@Override
 	public void run() {
@@ -27,8 +27,6 @@ public class TaskImportCorp extends TimerTask{
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
-			jedis.close();
 		}
 	}
 
@@ -119,17 +117,8 @@ public class TaskImportCorp extends TimerTask{
 
 			// System.out.println(corp);
 
-			putIntoRedis(corp);
+			corpDao.save(corp);
 		}
 		System.out.println("TaskImportCorp complete, number:"+trLength);
-	}
-
-	private void putIntoRedis(Corp corp) {
-		
-//		System.out.println(jedis.get("hfh"));
-		JSONObject jsonObject = new JSONObject(corp);
-		String corpStr = jsonObject.toString();
-		jedis.sadd(Constant.keyCorps, corpStr);
-		
 	}
 }

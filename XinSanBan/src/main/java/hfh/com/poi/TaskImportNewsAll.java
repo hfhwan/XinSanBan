@@ -20,8 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import redis.clients.jedis.Jedis;
 
 public class TaskImportNewsAll extends TimerTask {
-	Jedis jedis = new Jedis(Constant.redisHost);
-
+	NewsService newsService = new NewsService();
+	
 	@Override
 	public void run() {
 		System.out.println(new Date() + " TaskImportNewsAll begin");
@@ -41,7 +41,8 @@ public class TaskImportNewsAll extends TimerTask {
 							throw e1;
 						}
 					} 
-					JedisUtil.importNews(jedis, doc, url.getKey());
+					newsService.importNews(doc, url.getKey());
+					Thread.sleep(5000);
 				}
 				System.out.println(new Date() + "news add end:" + url.getKey() + " pages:" + i);
 			}
@@ -51,9 +52,6 @@ public class TaskImportNewsAll extends TimerTask {
 		} catch (IOException e1) {
 			// TODO mail
 			e1.printStackTrace();
-		}finally {
-			if (jedis != null)
-				jedis.close();
 		}
 		System.out.println(new Date() +" TaskImportNewsAll complete");
 	}
