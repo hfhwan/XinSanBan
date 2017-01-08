@@ -1,6 +1,7 @@
 package hfh.com.poi;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.jsoup.nodes.Document;
@@ -10,6 +11,12 @@ import org.jsoup.select.Elements;
 public class NewsService {
 	NewsDao newsDao = new NewsDao();
 	CorpDao corpDao = new CorpDao();
+	private Set<Corp> corps = new HashSet<Corp>();
+	
+	public void loadAllCorps() {
+		corpDao.loadAllCorps(corps);
+	}
+	
 	
 	public void importNews(Document doc, String shenfeng) throws InterruptedException, IOException {
 		
@@ -33,11 +40,15 @@ public class NewsService {
 //				System.out.println("addr-" + shenfeng);
 			}else{
 				newsDao.save(news);
-				Set<Corp> corps = corpDao.findCorpByNews(news);
-				for (Corp corp : corps) {
+				Set<Corp> corpsFinded = corpDao.findCorpByNews(news, corps);
+				for (Corp corp : corpsFinded) {
 					corp.getNews().add(news);
 					corp.setSendStatus(Constant.corpWaitSend);
 					corpDao.save(corp);
+					Constant.corps.add(corp.no);
+					
+					corps.remove(corp);
+					corps.add(corp);
 				}
 			}
 		}

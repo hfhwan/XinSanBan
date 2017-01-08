@@ -25,6 +25,7 @@ public class TaskImportNewsAll extends TimerTask {
 	@Override
 	public void run() {
 		System.out.println(new Date() + " TaskImportNewsAll begin");
+		newsService.loadAllCorps();
 		Document doc;
 		try {
 			for (Entry<String, String> url : Constant.ShenFengUrl.entrySet()) {
@@ -41,8 +42,9 @@ public class TaskImportNewsAll extends TimerTask {
 							throw e1;
 						}
 					} 
+					
 					newsService.importNews(doc, url.getKey());
-					Thread.sleep(5000);
+					Thread.sleep(10000);
 				}
 				System.out.println(new Date() + "news add end:" + url.getKey() + " pages:" + i);
 			}

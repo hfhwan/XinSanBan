@@ -1,12 +1,16 @@
 package hfh.com.poi;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Constant {
 
 	public static String redisHost = "192.168.0.107";
-	public static String keyCorps = "corps-all";
+	public static String keyCorp = "corp-";
+	
+	public static Set<String> corps = new HashSet<String>();
 	
 	//N-不要发 W-等待发 Y-已经发
 	public static String corpNoSend = "N";

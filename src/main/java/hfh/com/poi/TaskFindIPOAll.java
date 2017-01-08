@@ -24,6 +24,7 @@ public class TaskFindIPOAll extends TimerTask {
 			for (Corp corp : corps) {
 				System.out.println(corp);
 			}
+			System.out.println(Constant.corps.size() + "-----" + corps.size());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

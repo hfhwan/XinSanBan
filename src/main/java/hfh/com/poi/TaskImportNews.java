@@ -20,6 +20,7 @@ public class TaskImportNews extends TimerTask {
 	@Override
 	public void run() {
 		System.out.println("TaskImportNews begin");
+		newsService.loadAllCorps();
 		Document doc = null;
 		try {
 			for (Entry<String, String> url : Constant.ShenFengUrl.entrySet()) {
@@ -27,7 +28,7 @@ public class TaskImportNews extends TimerTask {
 				doc = Jsoup.connect(url.getValue()).get();
 				newsService.importNews( doc, url.getKey());
 				System.out.println("news add end:" + url.getKey());
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
