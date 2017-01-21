@@ -1,4 +1,4 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.service;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -7,6 +7,12 @@ import java.util.Set;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import com.hfh.xinsanban.Constant;
+import com.hfh.xinsanban.dao.CorpDao;
+import com.hfh.xinsanban.dao.NewsDao;
+import com.hfh.xinsanban.pojo.Corp;
+import com.hfh.xinsanban.pojo.News;
 
 public class NewsService {
 	NewsDao newsDao = new NewsDao();
@@ -45,7 +51,7 @@ public class NewsService {
 					corp.getNews().add(news);
 					corp.setSendStatus(Constant.corpWaitSend);
 					corpDao.save(corp);
-					Constant.corps.add(corp.no);
+//					Constant.corps.add(corp.getNo());
 					
 					corps.remove(corp);
 					corps.add(corp);

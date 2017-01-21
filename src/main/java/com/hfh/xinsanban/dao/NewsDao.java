@@ -1,15 +1,11 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.dao;
 
-import java.util.Set;
-
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import redis.clients.jedis.Jedis;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import redis.clients.jedis.Jedis;
+import com.hfh.xinsanban.Constant;
+import com.hfh.xinsanban.pojo.News;
 
 public class NewsDao {
 	Jedis jedis = new Jedis(Constant.redisHost);
@@ -18,12 +14,12 @@ public class NewsDao {
 	public void save(News news) throws JsonProcessingException {
 		String newsJson = om.writeValueAsString(news);
 		double score = Double.parseDouble(news.getsDate());
-		jedis.zadd("addr-" + news.addr, score, newsJson);
+		jedis.zadd("addr-" + news.getAddr(), score, newsJson);
 	}
 
 	public boolean exist(News news) throws JsonProcessingException {
 		String newsJson = om.writeValueAsString(news);
-		Long rank = jedis.zrank("addr-" + news.addr, newsJson);
+		Long rank = jedis.zrank("addr-" + news.getAddr(), newsJson);
 		if(rank == null){
 			return false;
 		}else{

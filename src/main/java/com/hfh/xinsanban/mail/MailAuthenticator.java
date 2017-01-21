@@ -1,4 +1,4 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.mail;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;

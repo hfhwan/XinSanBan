@@ -1,5 +1,7 @@
 package hfh.com.poi;
 
+import com.hfh.xinsanban.Constant;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

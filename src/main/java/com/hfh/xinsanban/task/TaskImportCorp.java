@@ -1,6 +1,5 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.task;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,9 +11,10 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.json.JSONObject;
 
-import redis.clients.jedis.Jedis;
+import com.hfh.xinsanban.Constant;
+import com.hfh.xinsanban.dao.CorpDao;
+import com.hfh.xinsanban.pojo.Corp;
 
 public class TaskImportCorp extends TimerTask{
 	CorpDao corpDao = new CorpDao();
@@ -36,10 +36,10 @@ public class TaskImportCorp extends TimerTask{
 		// FileInputStream("d:/FTP/new1.xls"));
 		// //2.得到Excel工作簿对象
 		// HSSFWorkbook wb = new HSSFWorkbook(fs);
-		System.out.println("TaskImportCorp begin");
+		System.out.println(Constant.getDate() +"-TaskImportCorp begin");
 		InputStream ins = null;
 		Workbook wb = null;
-		ins = new FileInputStream(new File("d:\\neeq.xlsx"));
+		ins = new FileInputStream(Constant.NeeqFilePath);
 		// ins=
 		// ExcelService.class.getClassLoader().getResourceAsStream(filePath);
 		wb = WorkbookFactory.create(ins);
@@ -119,6 +119,6 @@ public class TaskImportCorp extends TimerTask{
 
 			corpDao.save(corp);
 		}
-		System.out.println("TaskImportCorp complete, number:"+trLength);
+		System.out.println(Constant.getDate() +"-TaskImportCorp complete, number:"+trLength);
 	}
 }

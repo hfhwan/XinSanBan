@@ -1,23 +1,20 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.mail;
 
 import java.util.List;
 import java.util.Properties;
 
+import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-
-import org.springframework.stereotype.Component;
 
 /**
  * 简单邮件发送器，可单发，群发。
  * 
  */
-@Component
 public class MailSender {
 
 	/**
@@ -36,7 +33,7 @@ public class MailSender {
 
 	public MailSender()
 	{
-		init("ftqvpn@outlook.com", "abc@zzz3", "smtp-mail.outlook.com");
+		init("ftqvpn@sina.com", "abc@zzz3", "smtp.sina.com");
 	}
 	
 	/**
@@ -68,9 +65,9 @@ public class MailSender {
 		// 初始化props
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.host", smtpHostName);
-		 props.put("mail.smtp.socketFactory.port", 465);
-		 props.put("mail.smtp.starttls.enable","true");
-		//props.put("mail.smtp.ssl.enable", "true");
+//		 props.put("mail.smtp.socketFactory.port", 465);
+//		 props.put("mail.smtp.starttls.enable","true");
+		props.put("mail.smtp.ssl.enable", "true");
 		// 验证
 		authenticator = new MailAuthenticator(username, password);
 		// 创建session

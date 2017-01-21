@@ -1,25 +1,20 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.task;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.TimerTask;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import redis.clients.jedis.Jedis;
+import com.hfh.xinsanban.Constant;
+import com.hfh.xinsanban.service.NewsService;
 
 public class TaskImportNews extends TimerTask {
 	NewsService newsService = new NewsService();
 	@Override
 	public void run() {
-		System.out.println("TaskImportNews begin");
+		System.out.println(Constant.getDate() +"-TaskImportNews begin");
 		newsService.loadAllCorps();
 		Document doc = null;
 		try {
@@ -36,6 +31,6 @@ public class TaskImportNews extends TimerTask {
 			e1.printStackTrace();
 		}
 		
-		System.out.println("TaskImportNews complete");
+		System.out.println(Constant.getDate() + "-TaskImportNews complete" );
 	}
 }

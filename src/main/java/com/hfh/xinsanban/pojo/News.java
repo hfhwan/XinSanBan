@@ -1,4 +1,4 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.pojo;
 
 public class News {
 	String addr;

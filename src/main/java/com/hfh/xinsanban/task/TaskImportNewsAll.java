@@ -1,30 +1,23 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.task;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.TimerTask;
 
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import redis.clients.jedis.Jedis;
+import com.hfh.xinsanban.Constant;
+import com.hfh.xinsanban.service.NewsService;
 
 public class TaskImportNewsAll extends TimerTask {
 	NewsService newsService = new NewsService();
 	
 	@Override
 	public void run() {
-		System.out.println(new Date() + " TaskImportNewsAll begin");
+		System.out.println(Constant.getDate() + "-TaskImportNewsAll begin");
 		newsService.loadAllCorps();
 		Document doc;
 		try {
@@ -55,6 +48,6 @@ public class TaskImportNewsAll extends TimerTask {
 			// TODO mail
 			e1.printStackTrace();
 		}
-		System.out.println(new Date() +" TaskImportNewsAll complete");
+		System.out.println(Constant.getDate() +"-TaskImportNewsAll complete");
 	}
 }

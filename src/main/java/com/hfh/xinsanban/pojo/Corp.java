@@ -1,7 +1,9 @@
-package hfh.com.poi;
+package com.hfh.xinsanban.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.hfh.xinsanban.Constant;
 
 public class Corp {
 
